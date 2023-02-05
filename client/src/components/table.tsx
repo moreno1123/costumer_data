@@ -6,7 +6,7 @@ export default function Table(){
 
   useEffect(() => {
     async function fetchCostumers(){
-      const response = await fetch('http://localhost:5001/');
+      const response = await fetch('http://localhost:5001/costumers');
       const costumers = await response.json();
       setData(costumers);
       console.log(costumers);
@@ -53,7 +53,7 @@ export default function Table(){
                 <p>{costumer.birthdate}</p>
               </td>
               <td className="px-16 py-4">
-                <a className="cursor" href="/"><span className="bg-green-500 text-white px-6 py-2 rounded-full hover:bg-green-800 transition duration-200">gumb</span></a>
+                <a className="cursor" href={'/costumer/' + costumer._id}><span className="bg-green-500 text-white px-6 py-2 rounded-full hover:bg-green-800 transition duration-200">Details</span></a>
               </td>
             </tr>
           ))}

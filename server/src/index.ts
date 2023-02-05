@@ -20,9 +20,15 @@ const app = express();
 app.use(cors(options));
 app.use(express.json())
 
-app.get('/', cors(), async (req: Request, res: Response) => {
+app.get('/costumers', cors(), async (req: Request, res: Response) => {
   const costumers = await Costumer.find();
   res.json(costumers);
+})
+
+app.get('/costumers/:id', cors(), async (req: Request, res: Response) => {
+  const costumerId = req.params.id
+  const costumer = await Costumer.findById(costumerId)
+  res.json(costumer)
 })
 
 app.post('/', cors(), async (req: Request, res: Response) => {
