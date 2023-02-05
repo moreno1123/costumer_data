@@ -7,6 +7,7 @@ const CostumerSchema = new Schema({
   // id: ObjectId,
   name: String,
   lastname: String,
+  email: String,
   city: String,
   birthdate: String
 });
