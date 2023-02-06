@@ -13,7 +13,7 @@ export default function AddCostumerModal({setIsOpen}: any){
         <form onClick={(e) => handleParentClick(e)}  action="" className="border-2 border-gray-900 border-solid mt-6 flex flex-col gap-4 p-4 items-center rounded-xl bg-white">
 
           <div className="input-type">
-            <input type="text" name="firstname" placeholder="FirstName" className="border w-full px-5 py-2 focus:outline-none rounded-md"></input>
+            <input autoFocus={true} type="text" name="firstname" placeholder="FirstName" className="border w-full px-5 py-2 focus:outline-none rounded-md"></input>
           </div>
 
           <div className="input-type">

@@ -10,7 +10,7 @@ export default function Costumers(){
   return(
     <div className="App">
       <Table />
-      <button onClick={() => setIsOpen(true)} className="w-64 p-4 m-auto my-6 rounded-full flex items-center justify-center gap-2 bg-blue-300 hover:bg-blue-500 transition duration-200">add new costumer modal<HiOutlinePlusCircle size={25} className="hover:cursor-pointer"/></button>
+      <button onClick={() => setIsOpen(true)} className="w-64 p-4 m-auto my-6 rounded-full flex items-center justify-center gap-2 bg-blue-300 hover:bg-blue-500 transition duration-200">add new costumer<HiOutlinePlusCircle size={25} className="hover:cursor-pointer"/></button>
       {isOpen && <AddCostumerModal setIsOpen={setIsOpen}/>}
     </div>
   )
