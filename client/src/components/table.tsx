@@ -9,7 +9,6 @@ export default function Table(){
       const response = await fetch('http://localhost:5001/costumers');
       const costumers = await response.json();
       setData(costumers);
-      console.log(costumers);
     }
     fetchCostumers();
   }, [])
