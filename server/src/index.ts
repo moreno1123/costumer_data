@@ -29,8 +29,9 @@ app.post('/', async (req: Request, res: Response) => {
   const newCostumer = new Costumer({
     name: req.body.name,
     lastname: req.body.lastname,
+    email: req.body.email, 
     city: req.body.city,
-    birthdate: req.body.birthdate,
+    birthdate: req.body.birthdate
   });
   const createdCostumer = await newCostumer.save();
   res.json(createdCostumer)

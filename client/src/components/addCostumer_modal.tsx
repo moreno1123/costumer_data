@@ -1,7 +1,17 @@
 import { HiOutlinePlusCircle } from "react-icons/hi";
 import { MdOutlineCancel } from 'react-icons/md'
+import { useSelector, useDispatch } from "react-redux";
+import { toggleChangeAction } from "../redux/slices/addEditModalSlice";
 
-export default function AddCostumerModal({setIsOpen}: any){
+export default function AddCostumerModal(){
+
+  const state:boolean = useSelector((state:any) => state.appEdit.toggleModal)
+  const dispatch = useDispatch()
+
+  const onUpdate = () => {
+    dispatch(toggleChangeAction())
+    console.log(state)
+  }
 
   const handleParentClick = (e: React.MouseEvent<Element, MouseEvent>) => {
     e.stopPropagation();
@@ -9,7 +19,7 @@ export default function AddCostumerModal({setIsOpen}: any){
 
   return(
     <div className="App">
-      <div onClick={() => setIsOpen(false)} className="min-w-full min-h-screen items-center flex justify-center bg-gray-600 bg-opacity-90 absolute top-0">
+      <div onClick={onUpdate} className="min-w-full min-h-screen items-center flex justify-center bg-gray-600 bg-opacity-90 absolute top-0">
         <form onClick={(e) => handleParentClick(e)}  action="" className="border-2 border-gray-900 border-solid mt-6 flex flex-col gap-4 p-4 items-center rounded-xl bg-white">
 
           <div className="input-type">
@@ -33,11 +43,11 @@ export default function AddCostumerModal({setIsOpen}: any){
           </div>
 
           <div className="min-w-full flex flex-row justify-evenly">
-            <button onClick={() => setIsOpen(false)} className="flex justify-center text-md w-2/6 bg-blue-500 hover:bg-blue-800 text-white px-4 py-2 border rounded-md transition duration-200">
+            <button onClick={onUpdate} className="flex justify-center text-md w-2/6 bg-blue-500 hover:bg-blue-800 text-white px-4 py-2 border rounded-md transition duration-200">
               Add<span className="px-1"><HiOutlinePlusCircle size={24}></HiOutlinePlusCircle></span>
             </button>
 
-            <button onClick={() => setIsOpen(false)} className="flex justify-center text-md w-2/6 bg-red-600 hover:bg-red-800 text-white px-4 py-2 border rounded-md transition duration-200">
+            <button onClick={onUpdate} className="flex justify-center text-md w-2/6 bg-red-600 hover:bg-red-800 text-white px-4 py-2 border rounded-md transition duration-200">
               Cancel<span className="px-1"><MdOutlineCancel size={24}></MdOutlineCancel></span>
             </button>
           </div>

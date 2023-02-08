@@ -1,18 +1,16 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { fetchData } from "../redux/thunks"
+
 
 export default function Table(){
 
-  const [data, setData] = useState<any[]>([]);
+  const dispatch = useAppDispatch();
+  const data = useAppSelector((state) => state.data.data);
 
   useEffect(() => {
-    async function fetchCostumers(){
-      const response = await fetch('http://localhost:5001/costumers');
-      const costumers = await response.json();
-      setData(costumers);
-    }
-    fetchCostumers();
+    dispatch(fetchData())
   }, [])
-
 
   return(
     <div className="App">
@@ -37,7 +35,7 @@ export default function Table(){
             </tr>
         </thead>
         <tbody>
-          {data.map((costumer) => (              
+          {data.map((costumer: any) => (              
             <tr className="bh-gray-50 text-center" key={costumer._id}>
               <td className="px-16 py-4">
                 <p>{costumer.name} {costumer.lastname}</p>

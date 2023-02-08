@@ -2,13 +2,26 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import AddCostumerModal from "../components/addCostumer_modal"
 import DeleteCostumerModal from "../components/deleteCostumer_modal"
+import { useSelector, useDispatch } from "react-redux";
+import { toggleChangeAction } from "../redux/slices/addEditModalSlice";
+import { toggleDeleteChangeAction } from "../redux/slices/deleteModalSlice";
 
 export default function Costumer(){
 
+  const stateEdit:boolean = useSelector((state:any) => state.appEdit.toggleModal)
+  const stateDelete:boolean = useSelector((state:any) => state.appDelete.toggleDeleteModal)
+  const dispatch = useDispatch()
+
+  const onUpdateEdit = () => {
+    dispatch(toggleChangeAction())
+  }
+
+  const onUpdateDelete = () => {
+    dispatch(toggleDeleteChangeAction())
+  }
+
   const { id } = useParams();
   const [data, setData] = useState(Object);
-  const [isOpen, setIsOpen] = useState(false);
-  const [isOpenDelete, setIsOpenDelete] = useState(false);
 
   useEffect(() => {
     async function fetchCostumer(){
@@ -28,11 +41,11 @@ export default function Costumer(){
         <p><span className="font-bold">City:</span> {data.city}</p>
         <p><span className="font-bold">Birthdate:</span> {data.birthdate}</p>
         <p><span className="font-bold">Insurance price: </span><button>Calculate insurance price</button></p>
-        <button onClick={() => setIsOpen(true)}>Edit</button>
-        <button onClick={() => setIsOpenDelete(true)}>delete</button>
+        <button onClick={onUpdateEdit}>Edit</button>
+        <button onClick={onUpdateDelete}>delete</button>
       </div>
-      {isOpen && <AddCostumerModal setIsOpen={setIsOpen}/>}
-      {isOpenDelete && <DeleteCostumerModal setIsOpenDelete={setIsOpenDelete}/>}
+      {stateEdit ? <AddCostumerModal/> : <></>}
+      {stateDelete ? <DeleteCostumerModal/> : <></>}
     </div>
   )
 }
