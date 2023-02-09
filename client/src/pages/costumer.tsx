@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import AddCostumerModal from "../components/addCostumer_modal"
 import DeleteCostumerModal from "../components/deleteCostumer_modal"
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { fetchCostumer } from "../redux/thunks"
+import { fetchCostumer, getInsurance } from "../redux/thunks"
 import { toggleEditModal } from "../redux/slices/addEditModalSlice";
 import { toggleDeleteModal } from "../redux/slices/deleteModalSlice";
 
@@ -24,6 +24,13 @@ export default function Costumer(){
     dispatch(toggleDeleteModal())
   }
 
+  const calculateInsurance = () => {
+    dispatch(getInsurance({
+      city: data.city,
+      birthdate: data.birthdate
+    }))
+  }
+
   useEffect(() => {
     dispatch(fetchCostumer(id))
   },[])
@@ -36,7 +43,7 @@ export default function Costumer(){
         <p><span className="font-bold">E-mail:</span> {data.email}</p>
         <p><span className="font-bold">City:</span> {data.city}</p>
         <p><span className="font-bold">Birthdate:</span> {data.birthdate}</p>
-        <p><span className="font-bold">Insurance price: </span><button>Calculate insurance price</button></p>
+        <p><span className="font-bold">Insurance price: </span><button onClick={calculateInsurance}>Calculate insurance price</button></p>
         <button onClick={onUpdateEdit}>Edit</button>
         <button onClick={onUpdateDelete}>delete</button>
       </div>

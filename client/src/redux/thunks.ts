@@ -51,6 +51,20 @@ export const createCostumer = createAsyncThunk<any, any, any>(
   }
 );
 
+export const getInsurance = createAsyncThunk<any, any, any>(
+  "data/getInsurance",
+  async ({city, birthdate}) => {
+    const response = await fetch('http://localhost:5001/insurance', {
+      method: 'POST', 
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        city, birthdate
+      }),
+    });
+    return response.json()
+  }
+);
+
 
 
 

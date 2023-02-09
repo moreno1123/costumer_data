@@ -4,6 +4,7 @@ config();
 import express, { Request, Response } from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
+import insurance from './lib/calculateInsurance';
 
 import Costumer from './models/Costumers';
 
@@ -41,6 +42,12 @@ app.delete('/costumers/:id', async (req: Request, res: Response) => {
   const costumerId = req.params.id
   const costumer = await Costumer.findByIdAndDelete(costumerId)
   res.json(costumer)
+})
+
+app.post('/insurance', async (req: Request, res: Response) => {
+  const city = req.body.city
+  const birthdate = req.body.birthdate
+  res.json(city + birthdate)
 })
 
 mongoose.connect(process.env.MONGO_URL!).then(() => {
