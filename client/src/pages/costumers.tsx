@@ -2,7 +2,7 @@ import Table from "../components/table"
 import AddCostumerModal from "../components/addCostumer_modal"
 import { HiOutlinePlusCircle } from "react-icons/hi";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleChangeAction } from "../redux/slices/addEditModalSlice";
+import { toggleEditModal } from "../redux/slices/addEditModalSlice";
 
 export default function Costumers(){
 
@@ -10,7 +10,7 @@ export default function Costumers(){
   const dispatch = useDispatch()
 
   const onUpdate = () => {
-    dispatch(toggleChangeAction())
+    dispatch(toggleEditModal())
   }
 
   return(

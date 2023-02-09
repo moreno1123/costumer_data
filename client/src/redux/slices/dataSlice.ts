@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fetchData } from "../thunks";
+import { fetchCostumers, fetchCostumer, deleteCostumer } from "../thunks";
 import type { DataInstance } from "../thunks" 
 
 export interface DataState{
@@ -18,14 +18,14 @@ const dataSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-    .addCase(fetchData.pending, (state: DataState) => {
+    .addCase(fetchCostumers.pending, (state: DataState) => {
       state.loading = true;
     })
-    .addCase(fetchData.fulfilled, (state: DataState, action: PayloadAction<Array<DataInstance>>) => {
+    .addCase(fetchCostumers.fulfilled, (state: DataState, action: PayloadAction<Array<DataInstance>>) => {
       state.loading = false;
       state.data = action.payload;
     })
-    .addCase(fetchData.rejected, (state: DataState) => {
+    .addCase(fetchCostumers.rejected, (state: DataState) => {
       state.loading = false;
       state.data = [];
     })

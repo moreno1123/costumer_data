@@ -1,28 +1,24 @@
 import { AiOutlineDelete } from "react-icons/ai";
 import { MdOutlineCancel } from 'react-icons/md'
 import { useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { toggleDeleteChangeAction } from "../redux/slices/deleteModalSlice";
+import { useAppDispatch } from "../redux/hooks";
+import { deleteCostumer } from "../redux/thunks"
+import { toggleDeleteModal } from "../redux/slices/deleteModalSlice";
 
 export default function DeleteCostumerModal(){
 
-  const dispatch = useDispatch()
+  const { id } = useParams();
+
+  const dispatch = useAppDispatch();
 
   const onUpdateDelete = () => {
-    dispatch(toggleDeleteChangeAction())
+    dispatch(toggleDeleteModal())
   }
 
   const handleParentClick = (e: React.MouseEvent<Element, MouseEvent>) => {
     e.stopPropagation();
   };
-
-  const { id } = useParams();
   
-  async function handleDeleteCostumer(){
-    await fetch(`http://localhost:5001/costumers/${id}`, {
-      method:"DELETE",
-    });
-  }
 
   return(
     <div className="App">
@@ -32,7 +28,7 @@ export default function DeleteCostumerModal(){
           <p className="text-xl">Are you sure you want to delete this user?</p>
 
           <div className="min-w-full flex flex-row justify-evenly">
-            <button onClick={() => {handleDeleteCostumer(); window.location.href='/';}} className="flex justify-center text-md w-2/6 bg-red-500 hover:bg-red-800 text-white px-4 py-2 rounded-md transition duration-200">
+            <button onClick={() => {dispatch(deleteCostumer(id)); window.location.href='/';}} className="flex justify-center text-md w-2/6 bg-red-500 hover:bg-red-800 text-white px-4 py-2 rounded-md transition duration-200">
               Delete<span className="px-1"><AiOutlineDelete size={24}></AiOutlineDelete></span>
             </button>
 

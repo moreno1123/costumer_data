@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { fetchData } from "../redux/thunks"
-
+import { fetchCostumers } from "../redux/thunks"
 
 export default function Table(){
 
@@ -9,7 +8,7 @@ export default function Table(){
   const data = useAppSelector((state) => state.data.data);
 
   useEffect(() => {
-    dispatch(fetchData())
+    dispatch(fetchCostumers())
   }, [])
 
   return(

@@ -12,11 +12,11 @@ export const ToggleSlice = createSlice({
   name: 'toggleModal',
   initialState,
   reducers: {
-    toggleChangeAction: (state) => {
+    toggleEditModal: (state) => {
       state.toggleModal = !state.toggleModal
     }
   }
 }) 
 
 export default ToggleSlice.reducer;
-export const { toggleChangeAction } = ToggleSlice.actions
+export const { toggleEditModal } = ToggleSlice.actions

@@ -1,36 +1,32 @@
 import { useParams } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import AddCostumerModal from "../components/addCostumer_modal"
 import DeleteCostumerModal from "../components/deleteCostumer_modal"
-import { useSelector, useDispatch } from "react-redux";
-import { toggleChangeAction } from "../redux/slices/addEditModalSlice";
-import { toggleDeleteChangeAction } from "../redux/slices/deleteModalSlice";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { fetchCostumer } from "../redux/thunks"
+import { toggleEditModal } from "../redux/slices/addEditModalSlice";
+import { toggleDeleteModal } from "../redux/slices/deleteModalSlice";
 
 export default function Costumer(){
 
-  const stateEdit:boolean = useSelector((state:any) => state.appEdit.toggleModal)
-  const stateDelete:boolean = useSelector((state:any) => state.appDelete.toggleDeleteModal)
-  const dispatch = useDispatch()
+  const { id } = useParams();
+
+  const dispatch = useAppDispatch();
+  const data = useAppSelector((state) => state.data.data);
+  const stateEdit:boolean = useAppSelector((state:any) => state.appEdit.toggleModal)
+  const stateDelete:boolean = useAppSelector((state:any) => state.appDelete.toggleDeleteModal)
 
   const onUpdateEdit = () => {
-    dispatch(toggleChangeAction())
+    dispatch(toggleEditModal())
   }
 
   const onUpdateDelete = () => {
-    dispatch(toggleDeleteChangeAction())
+    dispatch(toggleDeleteModal())
   }
 
-  const { id } = useParams();
-  const [data, setData] = useState(Object);
-
   useEffect(() => {
-    async function fetchCostumer(){
-      const response = await fetch(`http://localhost:5001/costumers/${id}`);
-      const costumer = await response.json();
-      setData(costumer);
-    }
-    fetchCostumer();
-  }, [])
+    dispatch(fetchCostumer(id))
+  },[])
 
   return(
     <div className="App">

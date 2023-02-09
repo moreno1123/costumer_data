@@ -12,11 +12,11 @@ export const ToggleDeleteSlice = createSlice({
   name: 'toggleDeleteModal',
   initialState,
   reducers: {
-    toggleDeleteChangeAction: (state) => {
+    toggleDeleteModal: (state) => {
       state.toggleDeleteModal = !state.toggleDeleteModal
     }
   }
 }) 
 
 export default ToggleDeleteSlice.reducer;
-export const { toggleDeleteChangeAction } = ToggleDeleteSlice.actions
+export const { toggleDeleteModal } = ToggleDeleteSlice.actions
