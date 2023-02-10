@@ -8,7 +8,7 @@ import Costumer from './models/Costumers';
 import discount from "./data/discount.json";
 import price from "./data/base_price.json";
 
-const PORT = 5001;
+const PORT = 5000;
 
 const app = express();
 

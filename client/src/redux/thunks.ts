@@ -1,5 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 
+const URL = 'http://localhost:5000/'
+
 export type InstanceData = {
   _id: String, 
   name: String,
@@ -15,7 +17,7 @@ export type DataInstance = {data: Array<InstanceData>}
 export const fetchCostumers = createAsyncThunk(
   "data/fetchCostumers",
   async () => {
-    const response = await fetch('http://localhost:5001/costumers');
+    const response = await fetch(`${URL}costumers`);
     return response.json()
   }
 );
@@ -23,7 +25,7 @@ export const fetchCostumers = createAsyncThunk(
 export const fetchCostumer = createAsyncThunk<any, any, any>(
   "data/fetchCostumer",
   async (id) => {
-    const response = await fetch(`http://localhost:5001/costumers/${id}`);
+    const response = await fetch(`${URL}costumers/${id}`);
     return response.json()
   }
 );
@@ -31,7 +33,7 @@ export const fetchCostumer = createAsyncThunk<any, any, any>(
 export const deleteCostumer = createAsyncThunk<any, any, any>(
   "data/deleteCostumer",
   async (id) => {
-    const response = await fetch(`http://localhost:5001/costumers/${id}`, { method: 'DELETE' });
+    const response = await fetch(`${URL}costumers/${id}`, { method: 'DELETE' });
     return response.json()
   }
 );
@@ -39,7 +41,7 @@ export const deleteCostumer = createAsyncThunk<any, any, any>(
 export const createCostumer = createAsyncThunk<any, any, any>(
   "data/createCostumer",
   async ({name, lastname, email, city, birthdate}) => {
-    const response = await fetch('http://localhost:5001/', {
+    const response = await fetch(`${URL}`, {
       method: 'POST', 
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -52,7 +54,7 @@ export const createCostumer = createAsyncThunk<any, any, any>(
 export const updateCostumer = createAsyncThunk<any, any, any>(
   "data/createCostumer",
   async ({id, name, lastname, email, city, birthdate}) => {
-    const response = await fetch(`http://localhost:5001/costumers/${id}`, {
+    const response = await fetch(`${URL}costumers/${id}`, {
       method: 'PUT', 
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -66,7 +68,7 @@ export const updateCostumer = createAsyncThunk<any, any, any>(
 export const getInsurance = createAsyncThunk<any, any, any>(
   "data/getInsurance",
   async ({city, birthdate}) => {
-    const response = await fetch('http://localhost:5001/insurance', {
+    const response = await fetch(`${URL}insurance`, {
       method: 'POST', 
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
