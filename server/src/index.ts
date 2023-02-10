@@ -38,6 +38,19 @@ app.post('/', async (req: Request, res: Response) => {
   res.json(createdCostumer)
 })
 
+app.put('/costumers/:id', async (req: Request, res: Response) => {
+  const costumerId = req.params.id
+  const updateCostumer = ({
+    name: req.body.name,
+    lastname: req.body.lastname,
+    email: req.body.email, 
+    city: req.body.city,
+    birthdate: req.body.birthdate
+  });
+  const updatedCostumer = await Costumer.findByIdAndUpdate(costumerId, updateCostumer);
+  res.json(updatedCostumer)
+})
+
 app.delete('/costumers/:id', async (req: Request, res: Response) => {
   const costumerId = req.params.id
   const costumer = await Costumer.findByIdAndDelete(costumerId)

@@ -3,13 +3,15 @@ import editReducer from "./slices/addEditModalSlice"
 import deleteReducer from "./slices/deleteModalSlice"
 import dataReducer from "./slices/dataSlice"
 import insuranceReducer from "./slices/insuranceSlice"
+import updateReducer from "./slices/updateCostumerSlice"
 
 export const store = configureStore({
   reducer: {
     appEdit: editReducer,
     appDelete: deleteReducer,
     data: dataReducer,
-    insurance: insuranceReducer
+    insurance: insuranceReducer,
+    update: updateReducer
   }
 })
 

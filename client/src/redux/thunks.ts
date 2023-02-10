@@ -49,6 +49,19 @@ export const createCostumer = createAsyncThunk<any, any, any>(
     return response.json()
   }
 );
+export const updateCostumer = createAsyncThunk<any, any, any>(
+  "data/createCostumer",
+  async ({id, name, lastname, email, city, birthdate}) => {
+    const response = await fetch(`http://localhost:5001/costumers/${id}`, {
+      method: 'PUT', 
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name, lastname, email, city, birthdate
+      }),
+    });
+    return response.json()
+  }
+);
 
 export const getInsurance = createAsyncThunk<any, any, any>(
   "data/getInsurance",

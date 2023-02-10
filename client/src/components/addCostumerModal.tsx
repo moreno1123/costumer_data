@@ -2,9 +2,12 @@ import { HiOutlinePlusCircle } from "react-icons/hi";
 import { MdOutlineCancel } from 'react-icons/md'
 import { toggleEditModal } from "../redux/slices/addEditModalSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { createCostumer, fetchCostumers } from "../redux/thunks"
+import { createCostumer, fetchCostumers, updateCostumer, fetchCostumer } from "../redux/thunks"
+import { useParams } from "react-router-dom";
 
 export default function AddCostumerModal(){
+
+  const { id } = useParams();
 
   const state = useAppSelector((state) => state.appEdit.toggleModal)
   const dispatch = useAppDispatch()
@@ -16,15 +19,29 @@ export default function AddCostumerModal(){
   const handleSumbit = (e:any) => {
     e.preventDefault();
 
-    dispatch(createCostumer({
-      name: e.target.name.value,
-      lastname: e.target.lastname.value,
-      email: e.target.email.value,
-      city: e.target.city.value,
-      birthdate: e.target.birthdate.value
-    }));
+    if(id){
+      dispatch(updateCostumer({
+        id: id,
+        name: e.target.name.value,
+        lastname: e.target.lastname.value,
+        email: e.target.email.value,
+        city: e.target.city.value,
+        birthdate: e.target.birthdate.value
+      }));
+      dispatch(fetchCostumer(id));
+      console.log("bok")
+    }else{
+      dispatch(createCostumer({
+        name: e.target.name.value,
+        lastname: e.target.lastname.value,
+        email: e.target.email.value,
+        city: e.target.city.value,
+        birthdate: e.target.birthdate.value
+      }));
+      dispatch(fetchCostumers());
+    }
+
     dispatch(toggleEditModal());
-    dispatch(fetchCostumers());
   }
 
   const handleParentClick = (e: React.MouseEvent<Element, MouseEvent>) => {
