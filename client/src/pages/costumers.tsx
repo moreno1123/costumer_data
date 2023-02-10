@@ -1,5 +1,5 @@
 import Table from "../components/table"
-import AddCostumerModal from "../components/addCostumer_modal"
+import AddCostumerModal from "../components/addCostumerModal"
 import { HiOutlinePlusCircle } from "react-icons/hi";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleEditModal } from "../redux/slices/addEditModalSlice";

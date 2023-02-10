@@ -11,7 +11,6 @@ export type InstanceData = {
 }
 
 export type DataInstance = {data: Array<InstanceData>}
-export type SingleDataInstance = {data: InstanceData}
 
 export const fetchCostumers = createAsyncThunk(
   "data/fetchCostumers",
@@ -64,25 +63,3 @@ export const getInsurance = createAsyncThunk<any, any, any>(
     return response.json()
   }
 );
-
-
-
-
-
-
-
-
-
-
-// export const postData = createAsyncThunk(
-//   "type/postData",
-//   async (data) => {
-//     try {
-//       const response = await axios.post("https://reqres.in/api/users", data);
-//       // If you want to get something back
-//       return response.data;
-//     } catch (err) {
-//       console.error(err)
-//     }
-//   }
-// );

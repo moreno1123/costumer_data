@@ -48,8 +48,15 @@ export default function AddCostumerModal(){
             <input id="email" type="text" name="email" placeholder="Email" className="border w-full px-5 py-2 focus:outline-none rounded-md"></input>
           </div>
 
-          <div className="input-type">
-            <input id="city" type="text" name="city" placeholder="Salary" className="border w-full px-5 py-2 focus:outline-none rounded-md"></input>
+          <div className="input-type w-full">
+            <select name="city" id="city" className="border w-full px-5 py-2 focus:outline-none rounded-md bg-white">
+              <option value="Zagreb">Zagreb</option>
+              <option value="Split">Split</option>
+              <option value="Rijeka">Rijeka</option>
+              <option value="Osijek">Osijek</option>
+              <option value="Zadar">Zadar</option>
+              <option value="other">other</option>
+            </select>
           </div>
 
           <div className="input-type">

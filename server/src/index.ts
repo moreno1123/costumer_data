@@ -4,9 +4,9 @@ config();
 import express, { Request, Response } from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
-import insurance from './lib/calculateInsurance';
-
 import Costumer from './models/Costumers';
+import discount from "./data/discount.json";
+import price from "./data/base_price.json";
 
 const PORT = 5001;
 
@@ -47,7 +47,51 @@ app.delete('/costumers/:id', async (req: Request, res: Response) => {
 app.post('/insurance', async (req: Request, res: Response) => {
   const city = req.body.city
   const birthdate = req.body.birthdate
-  res.json(city + birthdate)
+
+  const amount = () => {
+    for(let i = 0;i<price.length;i++){
+      if(price[i].city === city){
+        return price[i].amount;
+      }
+    } 
+  }
+
+  function getAge (birthdate:string) {
+    const birth = new Date(birthdate)
+    const now = new Date()
+    const diff = new Date(now.valueOf() - birth.valueOf())
+    return Math.abs(diff.getFullYear() - 1970)
+  }
+  const age = getAge(birthdate) 
+
+
+  const discountPercentage = () => {
+    for(let i = 0;i<discount.length;i++){
+      if(discount[i].age.length > 4){
+        const first_value = Number(discount[i].age.substring(0,2))
+        const second_value = Number(discount[i].age.substring(3,6))
+        if (age > first_value && age < second_value) {
+          return discount[i].discount;
+        }
+      }else{
+        const first_value = Number(discount[i].age.charAt(0))
+        const second_value = Number(discount[i].age.substring(2,4))
+        if (age > first_value && age < second_value) {
+          return discount[i].discount;
+        }
+      }
+    } 
+  }
+
+  const insurancePrice = () => {
+    const percentage = Number(discountPercentage()) / 100
+    const amount_number = Number(amount())
+    const minus = amount_number * percentage
+
+    return amount_number - minus
+  }
+
+  res.json(insurancePrice())
 })
 
 mongoose.connect(process.env.MONGO_URL!).then(() => {

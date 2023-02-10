@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fetchCostumers, fetchCostumer, deleteCostumer } from "../thunks";
+import { fetchCostumers, fetchCostumer } from "../thunks";
 import type { DataInstance } from "../thunks" 
 
 export interface DataState{
@@ -28,6 +28,10 @@ const dataSlice = createSlice({
     .addCase(fetchCostumers.rejected, (state: DataState) => {
       state.loading = false;
       state.data = [];
+    })
+    .addCase(fetchCostumer.fulfilled, (state: any, action: PayloadAction<any>) => {
+      state.loading = false;
+      state.data = action.payload;
     })
   }
 })
